@@ -5,6 +5,8 @@
  */
 package calculator;
 
+import javax.swing.JEditorPane;
+
 /**
  *
  * @author bahlv
@@ -14,12 +16,43 @@ public class calc extends javax.swing.JFrame {
     /**
      * Creates new form calc
      */
+    double num,ans;
+    int calu;
+    
     public calc() {
         initComponents();
+        jRadioButton1.setEnabled(false);
+    }
+    
+    public void arithmatic_ope()
+    {
+        switch(calu)
+        {
+            case 1:
+                ans=num+Double.parseDouble(jTextField1.getText());
+                jTextField1.setText(Double.toString(ans));
+                break;
+            
+            case 2:
+                ans=num-Double.parseDouble(jTextField1.getText());
+                jTextField1.setText(Double.toString(ans));
+                break;
+                
+            case 3:
+                ans=num*Double.parseDouble(jTextField1.getText());
+                jTextField1.setText(Double.toString(ans));
+                break;
+                
+            case 4:
+                ans=num/Double.parseDouble(jTextField1.getText());
+                jTextField1.setText(Double.toString(ans));
+                break;
+        }
     }
     
     public void disable()
     {
+        jRadioButton1.setEnabled(true);
         jTextField1.setEnabled(false);
         jButton1.setEnabled(false);
         jButton2.setEnabled(false);
@@ -95,6 +128,7 @@ public class calc extends javax.swing.JFrame {
         jButton16 = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
         jButton19 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("calculator");
@@ -272,6 +306,9 @@ public class calc extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -321,11 +358,17 @@ public class calc extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -423,27 +466,49 @@ public class calc extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        jTextField1.setText(jTextField1.getText() + "+");
+        num=Double.parseDouble(jTextField1.getText());
+        calu=1;
+        jTextField1.setText("");
+        jLabel1.setText(num + "+");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        jTextField1.setText(jTextField1.getText() + "-");
+        num=Double.parseDouble(jTextField1.getText());
+        calu=2;
+        jTextField1.setText("");
+        jLabel1.setText(num + "-");
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        jTextField1.setText(jTextField1.getText() + "*");
+        num=Double.parseDouble(jTextField1.getText());
+        calu=3;
+        jTextField1.setText("");
+        jLabel1.setText(num + "*");
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        jTextField1.setText(jTextField1.getText() + "/");
+        num=Double.parseDouble(jTextField1.getText());
+        calu=4;
+        jTextField1.setText("");
+        jLabel1.setText(num + "/");
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        int length = jTextField1.getText().length();
+        int number = jTextField1.getText().length()-1;
+        String store;
+        if(length>0)
+        {
+            StringBuilder back = new StringBuilder(jTextField1.getText());
+            back.deleteCharAt(number);
+            store=back.toString();
+            jTextField1.setText(store);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        // TODO add your handling code here:
+        arithmatic_ope();
+        jLabel1.setText("");
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
@@ -505,6 +570,7 @@ public class calc extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JTextField jTextField1;
